@@ -1,8 +1,72 @@
 #include<stdio.h>
 #include<string.h>
+#include<bits/stdc++.h>
 #include<stdlib.h>
 #define pf printf
 #define sf scanf
+
+using namespace std;
+
+struct student
+{
+    char name[500];
+    char ID[500];
+    char grade[500];
+    struct student *next;
+};
+
+
+typedef struct student si;
+
+si *head = (si*)malloc(sizeof(si));
+si *start = head;
+
+
+void takeIn()
+{
+    pf("How many student you want to input: ");
+    int how;
+    sf("%d",&how);
+    getchar();
+
+    for(int i=0; i<how; i++)
+    {
+        pf("Enter name: ");
+        gets(head->name);
+        pf("Enter ID: ");
+        gets(head->ID);
+        pf("Enter Grade: ");
+        gets(head->grade);
+
+        head->next = (si*)malloc(sizeof(si));
+        if(head->next == NULL)
+        {
+            pf("Sorry! Memory overloaded.\n");
+            break;
+            return;
+        }
+        head = head->next;
+    }
+    head->next = NULL;
+
+}
+
+
+void printAll()
+{
+    si *st = start;
+    printf("Sl.\tName\t\t\tID\t\tGrade\t\t\n\n");
+
+    while(st->next)
+    {
+        puts(st->name);
+        puts(st->ID);
+        puts(st->grade);
+        st = st->next;
+    }
+
+}
+
 
 int main()
 {
@@ -16,9 +80,8 @@ int main()
 
     pf("OPERATION: ");
     int cmd;
-    sf("%d",&cmd);
 
-    while(1)
+    while(sf("%d",&cmd))
     {
         if(!cmd)
         {
@@ -33,109 +96,131 @@ int main()
         }*/
 
         puts("");
-        switch(cmd)
+
+        if(cmd == 1)
         {
-            case 1:
+            printf("1. Add new student Information\n");
+            pf("2. Delete student information\n");
+            pf("3. View all students\n");
+            pf("4. Back\n");
+
+            int cmds;
+            while(scanf("%d",&cmds))
+            {
+                if(cmds == 1)
                 {
-                    printf("1. Add new student Information\n");
-                    pf("2. Delete student information\n");
-                    pf("3. View all students\n");
-                    pf("4. Back\n");
-
-                    int cmds;
-                    sf("%d",&cmds);
-
-                    switch(cmds)
-                    {
-                        case 1:
-                                /*Create a new node for student and store information in it*/
-                                //. rest of the statement
-
-                            break;
-                        case 3:
-                            /*use view function to view student data*/
-                            //GLB
-
-                            break;
-                        case 2:
-                            //First search the node. then use delete function
-
-                            break;
-                        case 4:
-                            //Go back to the menu
-                           // goto JUMP;
-                            break;
-                    }
+                    /*Create a new node for student and store information in it*/
+                    //. rest of the statement
+                    takeIn();
+                }
+                else if(cmds == 2)
+                {
+                    /*use view function to view student data*/
+                    //GLB
+                    printAll();
+                }
+                else if(cmds == 3)
+                {
+                    //First search the node. then use delete function
+                    //break;
 
                 }
-                break;
-
-            case 2:
-            {
-                    pf("1.  Add new Employee Information\n");
-                    pf("2.  View all Employees\n");
-                    pf("3.  Delete Employee information\n");
-                    pf("4.  Back\n");
-
-                    int cmds;
-                    sf("%d",&cmds);
-
-                    switch(cmds)
-                    {
-                        case 1:
-                                /*Create a new node for student and store information in it*/
-                                //. rest of the statement
-
-                            break;
-                        case 2:
-                            /*use view function to view student data*/
-                            //GLB
-
-                            break;
-                        case 3:
-                            //First search the node. then use delete function
-
-                            break;
-                        case 4:
-                            //Go back to the menu
-                            //goto JUMP;
-                            break;
-                    }
-
-                break;
+                else if(cmds == 4)
+                {
+                    //Go back to the menu
+                    // goto JUMP;
+                    printf("Make another operation: \n");
+                    break;
+                }
+                else
+                {
+                    printf("Sorry! not recognizable. Try again.\n");
+                }
             }
 
+        }
 
-            case 3:
-                /*Use viewAll function*/
+        else if(cmd == 2)
+        {
+            printf("1. Add new student Information\n");
+            pf("2. Delete student information\n");
+            pf("3. View all students\n");
+            pf("4. Back\n");
+
+            int cmds;
+            sf("%d",&cmds);
+
+            if(cmds == 1)
+            {
+                /*Create a new node for student and store information in it*/
+                //. rest of the statement
+                takeIn();
+            }
+            else if(cmds == 2)
+            {
+                /*use view function to view student data*/
+                //GLB
+                printAll();
+            }
+            else if(cmds == 3)
+            {
+                //First search the node. then use delete function
                 break;
-
-            case 4;
-                /*Search by name*/
-                pf("1. Search by name\n");
-                pf("2. Search by ID\n");
-                int src;
-                sc("%d",&src);
-
-                if(src == 1)
-                {
-                    /*Use search function send parameter 1*/
-                }
-                else if(src == 2)
-                {
-                    //send parameter.
-                }
-
+            }
+            else if(cmds == 4)
+            {
+                //Go back to the menu
+                // goto JUMP;
                 break;
-
-            case 5:
-                /*Show allView function*/
-                break;
-
-            case 6:
-                break;
+            }
+            else
+            {
+                printf("Sorry! not recognizable. Try again.\n");
+            }
 
         }
+        else if(cmd == 3)
+        {
+            /*Use viewAll function*/
+            break;
+        }
+        else if(cmd == 4)
+        {
+            /*Search by name*/
+            pf("1. Search by name\n");
+            pf("2. Search by ID\n");
+            int src;
+            sf("%d",&src);
+
+            if(src == 1)
+            {
+                /*Use search function send parameter 1*/
+            }
+            else if(src == 2)
+            {
+                //send parameter.
+            }
+
+        }
+
+        else if(cmd == 5)
+        {
+            /*Show allView function*/
+            printAll();
+        }
+        else if(cmd == 0)
+            break;
+        else
+            {pf("Sorry! Not recognizable.Try again");}
+
+        puts("");
+        pf("1.  Students\n");
+        pf("2.  Employees\n");
+        pf("3.  Results\n");
+        pf("4.  Search\n");
+        pf("5.  Output all data base.\n");
+        pf("0.  exit\n\n");
+        pf("Operation: ");
 
 
     }
