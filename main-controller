@@ -1,13 +1,122 @@
 #include<stdio.h>
-#include<stdlib.h>
 #include<string.h>
-#include<cstdio.h>
-#include<math.h>
+#include<stdlib.h>
+#define pf printf
+#define sf scanf
 
 int main()
 {
+    pf("****************HI, I am CONTROLLER .Enter number to run operations.****************\n\n");
+    pf("1.  Students\n");
+    pf("2.  Employees\n");
+    pf("3.  Results\n");
+    pf("4.  Search\n");
+    pf("5.  Output all data base.\n");
+    pf("0.  exit\n\n");
+
+    pf("OPERATION: ");
+    int cmd;
+    sf("%d",&cmd);
+
+    while(1)
+    {
+        if(!cmd)
+        {
+            pf("Process Terminated\n");
+            break;
+        }
+
+        /*JUMP:
+        {
+            scanf("%d",&cmd);
+            if(!cmd)break;
+        }*/
+
+        puts("");
+        switch(cmd)
+        {
+            case 1:
+                {
+                    printf("1. Add new student Information\n");
+                    pf("2. Delete student information\n");
+                    pf("3. View all students\n");
+                    pf("4. Back\n");
+
+                    int cmds;
+                    sf("%d",&cmds);
+
+                    switch(cmds)
+                    {
+                        case 1:
+                                /*Create a new node for student and store information in it*/
+                                //. rest of the statement
+
+                            break;
+                        case 3:
+                            /*use view function to view student data*/
+                            //GLB
+
+                            break;
+                        case 2:
+                            //First search the node. then use delete function
+
+                            break;
+                        case 4:
+                            //Go back to the menu
+                           // goto JUMP;
+                            break;
+                    }
+
+                }
+                break;
+
+            case 2:
+            {
+                    pf("1.  Add new Employee Information\n");
+                    pf("2.  View all Employees\n");
+                    pf("3.  Delete Employee information\n");
+                    pf("4.  Back\n");
+
+                    int cmds;
+                    sf("%d",&cmds);
+
+                    switch(cmds)
+                    {
+                        case 1:
+                                /*Create a new node for student and store information in it*/
+                                //. rest of the statement
+
+                            break;
+                        case 2:
+                            /*use view function to view student data*/
+                            //GLB
+
+                            break;
+                        case 3:
+                            //First search the node. then use delete function
+
+                            break;
+                        case 4:
+                            //Go back to the menu
+                            //goto JUMP;
+                            break;
+                    }
+
+                break;
+            }
+
+
+            case 3:
+                /*The */
 
 
 
 
+        }
+
+
+    }
+
+
+    return 0;
 }
