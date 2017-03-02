@@ -12,6 +12,7 @@ struct student
     char name[500];
     char ID[500];
     char grade[500];
+    char sec[500];
     struct student *next;
 };
 
@@ -35,8 +36,8 @@ void takeIn()
         gets(head->name);
         pf("Enter ID: ");
         gets(head->ID);
-        pf("Enter Grade: ");
-        gets(head->grade);
+        pf("Enter Section: ");
+        gets(head->sec);
 
         head->next = (si*)malloc(sizeof(si));
         if(head->next == NULL)
@@ -52,20 +53,64 @@ void takeIn()
 }
 
 
-void printAll()
+void printStudentInfo()
 {
+    int sl=1;
     si *st = start;
-    printf("Sl.\tName\t\t\tID\t\tGrade\t\t\n\n");
+    printf("Sl.\t\tName\t\t\t\t        ID\t\t        \t\tGrade\t\t\n\n");
 
     while(st->next)
     {
-        puts(st->name);
-        puts(st->ID);
-        puts(st->grade);
+        pf("%d\t\t",sl++);
+
+        int sz = strlen(st->name);
+        for(int i=0; i<sz; i++)
+        {
+            printf("%c",st->name[i]);
+        }
+//        printf("\t\t\t      ");
+
+        for(int i=0; i<abs(40-sz); i++)
+        {
+            pf(" ");
+        }
+
+        sz = strlen(st->ID);
+        for(int i=0; i<sz; i++)
+        {
+            pf("%c",st->ID[i]);
+        }
+
+        for(int i=0; i<abs(40-sz); i++)
+        {
+            pf(" ");
+        }
+
+        sz = strlen(st->sec);
+        for(int i=0; i<sz; i++)
+        {
+            pf("%c",st->sec[i]);
+        }
+        for(int i=0; i<abs(40-sz); i++)
+        {
+            pf(" ");
+        }
+
+
+//        puts(st->ID);
+//        puts(st->grade);
         st = st->next;
+        for(int i=0; i<112; i++)
+        {
+            pf("-");
+        }
+        pf("\n");
     }
 
 }
+
+
+
 
 
 int main()
@@ -117,13 +162,13 @@ int main()
                 {
                     /*use view function to view student data*/
                     //GLB
-                    printAll();
+
                 }
                 else if(cmds == 3)
                 {
                     //First search the node. then use delete function
                     //break;
-
+                    printStudentInfo();
                 }
                 else if(cmds == 4)
                 {
@@ -142,8 +187,8 @@ int main()
 
         else if(cmd == 2)
         {
-            printf("1. Add new student Information\n");
-            pf("2. Delete student information\n");
+            printf("1. Add new Employee Information\n");
+            pf("2. Delete Employee information\n");
             pf("3. View all students\n");
             pf("4. Back\n");
 
@@ -160,17 +205,18 @@ int main()
             {
                 /*use view function to view student data*/
                 //GLB
-                printAll();
+
             }
             else if(cmds == 3)
             {
                 //First search the node. then use delete function
-                break;
+                printStudentInfo();
             }
             else if(cmds == 4)
             {
                 //Go back to the menu
                 // goto JUMP;
+                printf("Make another operation: \n");
                 break;
             }
             else
@@ -206,7 +252,7 @@ int main()
         else if(cmd == 5)
         {
             /*Show allView function*/
-            printAll();
+            printStudentInfo();
         }
         else if(cmd == 0)
             break;
