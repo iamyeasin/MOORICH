@@ -25,7 +25,7 @@ si *start = head;
 
 void takeIn()
 {
-    pf("How many student you want to input: ");
+    pf("How many person you want to input: ");
     int how;
     sf("%d",&how);
     getchar();
@@ -95,7 +95,6 @@ void printStudentInfo()
         {
             pf(" ");
         }
-
 
 //        puts(st->ID);
 //        puts(st->grade);
