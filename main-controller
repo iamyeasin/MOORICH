@@ -2,6 +2,7 @@
 #include<string.h>
 #include<bits/stdc++.h>
 #include<stdlib.h>
+
 #define pf printf
 #define sf scanf
 
@@ -9,10 +10,10 @@ using namespace std;
 
 struct student
 {
-    char name[500];
-    char ID[500];
-    char grade[500];
-    char sec[500];
+    char name[5000];
+    char ID[5000];
+    char grade[5000];
+    char sec[5000];
     struct student *next;
 };
 
@@ -109,6 +110,69 @@ void printStudentInfo()
 }
 
 
+
+void SearchBy(char *name)
+{
+    int len = strlen(name);
+//    for(int i=0; i<len; i++) pf("%c",s[i]);
+    int sl = 1,flag=0;
+    si *st = start;
+    printf("Sl.\t\tName\t\t\t\t        ID\t\t        \t\tGrade\t\t\n\n"); // Printing style is same
+
+    while(st->next)
+    {
+        if(((strcmp(st->name,name)) == 0) || (strcmp(st->ID,name)) == 0)
+        {
+            pf("%d\t\t",sl++);
+
+            int sz = strlen(st->name);
+            for(int i=0; i<sz; i++)
+            {
+                printf("%c",st->name[i]);
+            }
+//        printf("\t\t\t      ");
+
+            for(int i=0; i<abs(40-sz); i++)
+            {
+                pf(" ");
+            }
+
+            sz = strlen(st->ID);
+            for(int i=0; i<sz; i++)
+            {
+                pf("%c",st->ID[i]);
+            }
+
+            for(int i=0; i<abs(40-sz); i++)
+            {
+                pf(" ");
+            }
+
+            sz = strlen(st->sec);
+            for(int i=0; i<sz; i++)
+            {
+                pf("%c",st->sec[i]);
+            }
+            for(int i=0; i<abs(40-sz); i++)
+            {
+                pf(" ");
+            }
+
+//        puts(st->ID);
+//        puts(st->grade);
+            st = st->next;
+            for(int i=0; i<112; i++)
+            {
+                pf("-");
+            }
+            pf("\n");
+            flag = 1;
+        }
+    }
+
+    if(!flag)pf("Sorry! No records Found\n");
+
+}
 
 
 
@@ -234,16 +298,33 @@ int main()
             /*Search by name*/
             pf("1. Search by name\n");
             pf("2. Search by ID\n");
+
             int src;
             sf("%d",&src);
 
             if(src == 1)
             {
                 /*Use search function send parameter 1*/
+                char searchName[256];
+
+                pf("Enter name: ");
+                scanf("\n"); // Will eat the garbage newline pressed by enter
+                gets(searchName);
+                SearchBy(searchName); // Will show the matching list
+                pf("Want to make another Operation?\n");
+
             }
             else if(src == 2)
             {
                 //send parameter.
+
+                char searchID[256];
+                pf("Enter ID: ");
+                sf("\n");
+                gets(searchID); // ID is string too... I can send ID . It'll show the same list
+                SearchBy(searchID);
+                pf("Want to make another Operation?\n");
+
             }
 
         }
@@ -256,7 +337,9 @@ int main()
         else if(cmd == 0)
             break;
         else
-            {pf("Sorry! Not recognizable.Try again");}
+        {
+            pf("Sorry! Not recognizable.Try again");
+        }
 
         puts("");
         pf("1.  Students\n");
