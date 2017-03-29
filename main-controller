@@ -337,7 +337,7 @@ int main()
         }
         else if(cmd == 6)
         {
-            pf("Welcome to the user manual. Every time the menu appears to the Screen just put the serial number\n
+            pf("Welcome to the user manual. Every time the menu appears to the Screen just put the serial number\n");
             pf("to execute the operation.Simply Do as the command line tells you to do based on your operation it will\n");
             pf("make you feel comfortable to use this. Thank you\n");
         }
@@ -354,6 +354,7 @@ int main()
         pf("3.  Results\n");
         pf("4.  Search\n");
         pf("5.  Output all data base.\n");
+        pf("6.  User Manual\n");
         pf("0.  exit\n\n");
         pf("Operation: ");
 
