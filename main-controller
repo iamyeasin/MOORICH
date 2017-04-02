@@ -253,7 +253,7 @@ int main()
         {
             printf("1. Add new Employee Information\n");
             pf("2. Delete Employee information\n");
-            pf("3. View all students\n");
+            pf("3. View all Employees\n");
             pf("4. Back\n");
 
             int cmds;
@@ -292,6 +292,7 @@ int main()
         else if(cmd == 3)
         {
             /*Use viewAll function*/
+
             break;
         }
         else if(cmd == 4)
