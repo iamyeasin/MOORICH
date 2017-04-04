@@ -225,7 +225,7 @@ void printStudentInfo()
 
 
 
-si* SearchBy(char *name,int ret)
+si* SearchByStudent(char *name,int ret)
 {
     int len = strlen(name);
 //    for(int i=0; i<len; i++) pf("%c",s[i]);
@@ -262,6 +262,7 @@ si* SearchBy(char *name,int ret)
             for(int i=0; i<abs(40-sz); i++)
             {
                 pf(" ");
+
             }
 
             sz = strlen(st->ID);
@@ -304,9 +305,106 @@ si* SearchBy(char *name,int ret)
         st= st->next;
     }
 
-    if(!flag)pf("Sorry! No records Found\n");
+    if(!flag)
+    {
+        pf("Sorry! No records Found\n");
+        return NULL;
+    }
 
 }
+
+
+///Search for EMPLOYEE -> TO AVOID CONFLICT
+
+
+ei* SearchByEmployee(char *name,int ret)
+{
+    int len = strlen(name);
+//    for(int i=0; i<len; i++) pf("%c",s[i]);
+    int sl = 1,flag=0;
+    ei *st = start2;
+
+    if(ret == 2)
+    {
+        while(st->next->next)
+        {
+            if((((strcmp(st->next->name,name)) == 0) || ((strcmp(st->next->ID,name)) == 0 )))
+            {
+                return st;
+            }
+            st=st->next;
+        }
+    }
+
+    if(ret)printf("Sl.\t\tName\t\t\t\t        ID\t\t        \t\Salary\t\t\n\n"); // Printing style is same
+
+    while(st->next)
+    {
+        if((((strcmp(st->name,name)) == 0) || ((strcmp(st->ID,name)) == 0 ))&& ret == 1)
+        {
+            pf("%d\t\t",sl++);
+
+            int sz = strlen(st->name);
+            for(int i=0; i<sz; i++)
+            {
+                printf("%c",st->name[i]);
+            }
+//        printf("\t\t\t      ");
+
+            for(int i=0; i<abs(40-sz); i++)
+            {
+                pf(" ");
+
+            }
+
+            sz = strlen(st->ID);
+            for(int i=0; i<sz; i++)
+            {
+                pf("%c",st->ID[i]);
+            }
+
+            for(int i=0; i<abs(40-sz); i++)
+            {
+                pf(" ");
+            }
+
+            sz = strlen(st->salary);
+            for(int i=0; i<sz; i++)
+            {
+                pf("%c",st->salary[i]);
+            }
+            for(int i=0; i<abs(40-sz); i++)
+            {
+                pf(" ");
+            }
+
+//        puts(st->ID);
+//        puts(st->grade);
+            st = st->next;
+            for(int i=0; i<112; i++)
+            {
+                pf("-");
+            }
+            pf("\n");
+            flag = 1;
+        }
+        else if((((strcmp(st->name,name)) == 0) || ((strcmp(st->ID,name)) == 0 ))&& ret == 0)
+        {
+            flag = 1;
+            return st;
+        }
+
+        st= st->next;
+    }
+
+    if(!flag)
+    {
+        pf("Sorry! No records Found\n");
+        return NULL;
+    }
+
+}
+
 
 
 void deleteStudentInfo(si *prev,si *cur)
@@ -329,6 +427,28 @@ void deleteStudentInfo(si *prev,si *cur)
 
 }
 
+
+void deleteEmployeeInfo(ei *prev,ei *cur)
+{
+
+    if(prev == start2)
+    {
+        start2 = start2->next;
+        pf("Node Deleted");
+    }
+    else if(prev == NULL)
+    {
+        pf("Error occurred!Can't find the information.");
+        return;
+    }
+    else
+    {
+        prev->next = cur->next;
+        free(cur);
+    }
+
+
+}
 
 
 int main()
@@ -368,7 +488,7 @@ int main()
             pf("3. View all students\n");
             pf("4. Back\n");
 
-            int cmds;
+            int cmds,x=0;
             while(scanf("%d",&cmds))
             {
                 if(cmds == 1)
@@ -385,8 +505,15 @@ int main()
                     char s[5000];
 
                     sf(" %[^\n]",&s);
-                    si *DEL = SearchBy(s,0);
-                    pf("%s %s %s\n",DEL->name,DEL->ID,DEL->sec);
+                    si *DEL = SearchByStudent(s,0);
+                    if(DEL == NULL)
+                    {
+                        pf("Run another Operation\n");
+                        continue;
+                    }
+
+
+                    pf("\n%s %s %s\n",DEL->name,DEL->ID,DEL->sec);
 
                     pf("\nIs this is the person you want to delete? \n1. Yes\n2. No\n\n");
                     int n;
@@ -395,7 +522,7 @@ int main()
 
                     if(n==1)
                     {
-                        si *c = SearchBy(s,2);
+                        si *c = SearchByStudent(s,2);
                         deleteStudentInfo(c,DEL);
                     }
                     else if(n=2)
@@ -403,10 +530,11 @@ int main()
                         continue;
                     }
 
-//                printf("1. Add new student Information\n");
-//                pf("2. Delete student information\n");
-//                pf("3. View all students\n");
-//                pf("4. Back\n");
+
+                    printf("1. Add new student Information\n");
+                    pf("2. Delete student information\n");
+                    pf("3. View all students\n");
+                    pf("4. Back\n");
 
 
                 }
@@ -415,6 +543,98 @@ int main()
                     //First search the node. then use delete function
                     //break;
                     printStudentInfo();
+                    x=1;
+                }
+                else if(cmds == 4)
+                {
+                    //Go back to the menu
+                    // goto JUMP;
+                    printf("Make another operation: \n");
+                    break;
+                }
+                else
+                {
+                    printf("Sorry! not recognizable. Try again.\n");
+                }
+
+                if(!x)
+                {
+                    pf("\n");
+                    printf("1. Add new student Information\n");
+                    pf("2. Delete student information\n");
+                    pf("3. View all students\n");
+                    pf("4. Back\n");
+                }
+
+            }
+
+        }
+
+        else if(cmd == 2)
+        {
+            printf("1. Add new Employee Information\n");
+            pf("2. Delete Employee information\n");
+            pf("3. View all Employee\n");
+            pf("4. Back\n");
+
+            int cmds,x=0;
+            while(sf("%d",&cmds))
+            {
+                if(cmds == 1)
+                {
+                    /*Create a new node for student and store information in it*/
+                    //. rest of the statement
+                    takeInEmployee();
+                }
+                else if(cmds == 2)
+                {
+                    //First search the node. then use delete function
+                    //GLB
+
+                    pf("Want to delete Employee information? let's find out\nEnter the name or ID:  ");
+                    char s[5000];
+
+                    sf(" %[^\n]",&s);
+                    ei *DEL = SearchByEmployee(s,0);
+                    if(DEL == NULL)
+                    {
+                        pf("Run another Operation\n");
+                        continue;
+                    }
+                    pf("\n%s %s %s\n",DEL->name,DEL->ID,DEL->salary);
+
+                    pf("\nIs this is the information you want to delete? \n1. Yes\n2. No\n\n");
+                    int n;
+                    sf("%d",&n);
+
+
+                    if(n==1)
+                    {
+                        ei *c = SearchByEmployee(s,2);
+                        deleteEmployeeInfo(c,DEL);
+                    }
+                    else if(n=2)
+                    {
+                        pf("\nPlease try again!\n");
+                        continue;
+                    }
+
+                    if(!x)
+                    {
+                        printf("1. Add new Employee Information\n");
+                        pf("2. Delete Employee information\n");
+                        pf("3. View all Employee\n");
+                        pf("4. Back\n");
+                    }
+
+
+
+                }
+                else if(cmds == 3)
+                {
+                    //Use printEmployeeInfo function to view
+                    printEmployeeInfo();
+                    x=1;
                 }
                 else if(cmds == 4)
                 {
@@ -429,54 +649,6 @@ int main()
                 }
 
                 pf("\n");
-                printf("1. Add new student Information\n");
-                pf("2. Delete student information\n");
-                pf("3. View all students\n");
-                pf("4. Back\n");
-            }
-
-        }
-
-        else if(cmd == 2)
-        {
-            printf("1. Add new Employee Information\n");
-            pf("2. Delete Employee information\n");
-            pf("3. View all Employee\n");
-            pf("4. Back\n");
-
-            int cmds;
-            while(sf("%d",&cmds))
-            {
-                if(cmds == 1)
-                {
-                    /*Create a new node for student and store information in it*/
-                    //. rest of the statement
-                    takeInEmployee();
-                }
-                else if(cmds == 2)
-                {
-                    //First search the node. then use delete function
-                    //GLB
-
-
-                }
-                else if(cmds == 3)
-                {
-                    //Use printEmployeeInfo function to view
-                    printEmployeeInfo();
-                }
-                else if(cmds == 4)
-                {
-                    //Go back to the menu
-                    // goto JUMP;
-                    printf("Make another operation: \n");
-                    break;
-                }
-                else
-                {
-                    printf("Sorry! not recognizable. Try again.\n");
-                }
-
                 printf("1. Add new Employee Information\n");
                 pf("2. Delete Employee information\n");
                 pf("3. View all Employee\n");
@@ -487,12 +659,8 @@ int main()
         }
         else if(cmd == 3)
         {
-            /*Use viewAll function*/
-            pf("All available Students DATABASES: \n");
-            printStudentInfo();
-            pf("\n\n");
-            pf("All available Employee DATABASES: \n");
-            printEmployeeInfo();
+            /*Use Result function*/
+
 
             break;
         }
@@ -513,7 +681,7 @@ int main()
                 pf("Enter name: ");
                 scanf("\n"); // Will eat the garbage newline pressed by enter
                 gets(searchName);
-                SearchBy(searchName,1); // Will show the matching list
+                SearchByStudent(searchName,1); // Will show the matching list
                 pf("Want to make another Operation?\n");
 
             }
@@ -525,7 +693,7 @@ int main()
                 pf("Enter ID: ");
                 sf("\n");
                 gets(searchID); // ID is string too... I can send ID . It'll show the same list
-                SearchBy(searchID,1);
+                SearchByStudent(searchID,1);
                 pf("Want to make another Operation?\n");
 
             }
@@ -535,7 +703,11 @@ int main()
         else if(cmd == 5)
         {
             /*Show allView function*/
+            pf("All available Students DATABASES: \n");
             printStudentInfo();
+            pf("\n\n");
+            pf("All available Employee DATABASES: \n");
+            printEmployeeInfo();
         }
         else if(cmd == 6)
         {
