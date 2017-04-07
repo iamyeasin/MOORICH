@@ -677,15 +677,21 @@ int main()
                     if(n==1)
                     {
                         si *c = SearchByStudent(s,2); // FIX HERE
-                        deleteStudentInfo(c,DEL);
+                        if(c == NULL)
+                        {
+                            start = head;
+                            continue;
+                        }
+                        else
+                        {
+                            deleteStudentInfo(c,DEL);
+                        }
+
                     }
                     else if(n=2)
                     {
                         continue;
                     }
-
-
-
 
                 }
                 else if(cmds == 3)
@@ -751,7 +757,9 @@ int main()
                     pf("5. Back\n\n");
                 }
 
+                x =0;
             }
+
 
         }
 
@@ -797,6 +805,11 @@ int main()
                     if(n==1)
                     {
                         ei *c = SearchByEmployee(s,2);
+                        if(c == NULL)
+                        {
+                            head2 = start2;
+                            continue;
+                        }
                         deleteEmployeeInfo(c,DEL);
                     }
                     else if(n=2)
@@ -896,6 +909,7 @@ int main()
             pf("1. Creating A result list\n");
             pf("2. Printing the recent result list\n");
             pf("3. Clearing the previous result list\n");
+            pf("4. back\n");
 
             int x;
             sf("%d",&x);
@@ -912,6 +926,19 @@ int main()
             {
                 start3 = head3;
                 pf("Result Board Cleared Successfully.\n");
+            }
+            else if(x == 4)
+            {
+                puts("");
+                pf("1.  Students\n");
+                pf("2.  Employees\n");
+                pf("3.  Result Board\n");
+                pf("4.  Search\n");
+                pf("5.  Output all data base.\n");
+                pf("6.  User Manual\n");
+                pf("0.  exit\n\n");
+                pf("Operation: ");
+                continue;
             }
 
         }
