@@ -218,11 +218,12 @@ void printEmployeeInfo()
 //        puts(st->ID);
 //        puts(st->grade);
         st = st->next;
+        pf("\n");
         for(int i=0; i<112; i++)
         {
             pf("-");
         }
-        pf("\n");
+        pf("\n\n");
     }
 
 }
