@@ -519,6 +519,7 @@ si* SearchByStudent(char *name,int ret) // Ret 2 returns prev add,1 ret cur add 
             }
             pf("\n");
             flag = 1;
+            break;
         }
         else if((((strcmp(st->name,name)) == 0) || ((strcmp(st->ID,name)) == 0 ))&& ret == 0)
         {
@@ -614,6 +615,7 @@ ei* SearchByEmployee(char *name,int ret) ///Ret 1 for printing the results , 2 f
             }
             pf("\n");
             flag = 1;
+            break;
         }
         else if((((strcmp(st->name,name)) == 0) || ((strcmp(st->ID,name)) == 0 ))&& ret == 0)
         {
