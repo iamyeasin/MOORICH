@@ -90,7 +90,7 @@ void printResultBoard()
 {
     rb *st = start3;
     int sl=0;
-    printf("Sl.\t\ID\t\t\t\t        Grade\n\n");
+    printf("Sl.\t\t\ID\t\t\t\t        Grade\n\n");
 
     if(st!= NULL)
     {
@@ -933,34 +933,35 @@ int main()
             pf("3. Clearing the previous result list\n");
             pf("4. back\n");
 
-            int x;
-            sf("%d",&x);
+            int x,ff=0;
+            while(sf("%d",&x))
+            {
+                ff = 1; // FLAGING THE SUBMENU PRINTS
+                if(x==1)
+                {
+                    createResultBoard();
+                }
+                else if(x == 2)
+                {
+                    printResultBoard();
+                }
+                else if(x == 3)
+                {
+                    start3 = head3;
+                    pf("Result Board Cleared Successfully.\n");
+                }
+                else if(x == 4)
+                {
+                    break;
+                }
 
-            if(x==1)
-            {
-                createResultBoard();
-            }
-            else if(x == 2)
-            {
-                printResultBoard();
-            }
-            else if(x == 3)
-            {
-                start3 = head3;
-                pf("Result Board Cleared Successfully.\n");
-            }
-            else if(x == 4)
-            {
-                puts("");
-                pf("1.  Students\n");
-                pf("2.  Employees\n");
-                pf("3.  Result Board\n");
-                pf("4.  Search\n");
-                pf("5.  Output all data base.\n");
-                pf("6.  User Manual\n");
-                pf("0.  exit\n\n");
-                pf("Operation: ");
-                continue;
+                if(ff)
+                {
+                    pf("1. Creating A result list\n");
+                    pf("2. Printing the recent result list\n");
+                    pf("3. Clearing the previous result list\n");
+                    pf("4. back\n");
+                }
             }
 
         }
@@ -969,33 +970,47 @@ int main()
             /*Search by name*/
             pf("1. Search by name\n");
             pf("2. Search by ID\n");
+            pf("3. Back");
 
-            int src;
-            sf("%d",&src);
-
-            if(src == 1)
+            int src,ff=0;
+            while(sf("%d",&src))
             {
-                /*Use search function send parameter 1*/
-                char searchName[256];
+                ff=1; // Flagging the source
+                if(src == 1)
+                {
+                    /*Use search function send parameter 1*/
+                    char searchName[256];
 
-                pf("Enter name: ");
-                scanf("\n"); // Will eat the garbage newline pressed by enter
-                gets(searchName);
-                SearchByStudent(searchName,1); // Will show the matching list
-                pf("Want to make another Operation?\n");
+                    pf("Enter name: ");
+                    scanf("\n"); // Will eat the garbage newline pressed by enter
+                    gets(searchName);
+                    SearchByStudent(searchName,1); // Will show the matching list
+                    pf("Want to make another Operation?\n");
 
-            }
-            else if(src == 2)
-            {
-                //send parameter.
+                }
+                else if(src == 2)
+                {
+                    //send parameter.
 
-                char searchID[256];
-                pf("Enter ID: ");
-                sf("\n");
-                gets(searchID); // ID is string too... I can send ID . It'll show the same list
-                SearchByStudent(searchID,1);
-                pf("Want to make another Operation?\n");
+                    char searchID[256];
+                    pf("Enter ID: ");
+                    sf("\n");
+                    gets(searchID); // ID is string too... I can send ID . It'll show the same list
+                    SearchByStudent(searchID,1);
+                    pf("Want to make another Operation?\n");
 
+                }
+                else if(src == 3)
+                {
+                    break;
+                }
+
+                if(ff)
+                {
+                    pf("1. Search by name\n");
+                    pf("2. Search by ID\n");
+                    pf("3. Back");
+                }
             }
 
         }
