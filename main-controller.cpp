@@ -1048,7 +1048,7 @@ int main()
         else if(cmd == 6)
         {
             pf("Welcome to the user manual. Every time the menu appears to the Screen just put the serial number\n");
-            pf("to execute the operation.Simply Do as the command line tells you to do based on your operation it will\n");
+            pf("to execute the operation.Simply Do as the command line tells you to do, based on your operation it will\n");
             pf("make you feel comfortable to use this. Thank you\n");
         }
         else if(cmd == 0)
