@@ -987,6 +987,7 @@ int main()
                     gets(searchName);
                     SearchByStudent(searchName,1); // Will show the matching list
                     pf("Want to make another Operation?\n");
+                    memset(searchName,'\0',sizeof(searchName));
 
                 }
                 else if(src == 2)
@@ -999,7 +1000,7 @@ int main()
                     gets(searchID); // ID is string too... I can send ID . It'll show the same list
                     SearchByStudent(searchID,1);
                     pf("\nWant to make another Operation?\n");
-
+                    memset(searchID,'\0',sizeof(searchID));
                 }
                 else if(src == 3)
                 {
@@ -1012,6 +1013,7 @@ int main()
                     pf("2. Search by ID\n");
                     pf("3. Back\n");
                 }
+
 
             }
 
