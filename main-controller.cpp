@@ -89,13 +89,45 @@ void createResultBoard()
 void printResultBoard()
 {
     rb *st = start3;
+    int sl=0;
     printf("Sl.\t\ID\t\t\t\t        Grade\n\n");
+
     if(st!= NULL)
     {
         while(st->next)
         {
-            printf("%s %s\n",st->ID,st->grade);
+            pf("%d\t\t",++sl);
+
+            int sz = strlen(st->ID);
+            for(int i=0; i<sz; i++)
+            {
+                pf("%c",st->ID[i]);
+            }
+
+            for(int i=0; i<abs(40-sz); i++)
+            {
+                pf(" ");
+            }
+
+            sz = strlen(st->grade);
+            for(int i=0; i<sz; i++)
+            {
+                pf("%c",st->grade[i]);
+            }
+            for(int i=0; i<abs(40-sz); i++)
+            {
+                pf(" ");
+            }
+
+//        puts(st->ID);
+//        puts(st->grade);
             st = st->next;
+            pf("\n");
+            for(int i=0; i<112; i++)
+            {
+                pf("-");
+            }
+            pf("\n\n");
         }
     }
 
