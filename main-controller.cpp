@@ -609,6 +609,7 @@ ei* SearchByEmployee(char *name,int ret) ///Ret 1 for printing the results , 2 f
 //        puts(st->ID);
 //        puts(st->grade);
             st = st->next;
+            pf("\n"); // SECTION DIVIDER
             for(int i=0; i<112; i++)
             {
                 pf("-");
@@ -683,6 +684,7 @@ int main()
             int cmds,x=0;
             while(scanf("%d",&cmds))
             {
+
                 if(cmds == 1)
                 {
                     /*Create a new node for student and store information in it*/
@@ -729,7 +731,7 @@ int main()
                     //First search the node. then use delete function
                     //break;
                     printStudentInfo();
-                    x=1;
+
                 }
                 else if(cmds == 4)
                 {
@@ -804,6 +806,7 @@ int main()
             int cmds,x=0;
             while(sf("%d",&cmds))
             {
+
                 if(cmds == 1)
                 {
                     /*Create a new node for student and store information in it*/
@@ -859,7 +862,7 @@ int main()
                 {
                     //Use printEmployeeInfo function to view
                     printEmployeeInfo();
-                    x=1;
+
                 }
                 else if(cmds == 4)
                 {
@@ -987,7 +990,13 @@ int main()
                     pf("Enter name: ");
                     scanf("\n"); // Will eat the garbage newline pressed by enter
                     gets(searchName);
+
+                    pf("ON STUDENT\n\n");
                     SearchByStudent(searchName,1); // Will show the matching list
+
+                    pf("\n\nON EMPLOYEE\n\n");
+                    SearchByEmployee(searchName,1);
+
                     pf("Want to make another Operation?\n");
                     memset(searchName,'\0',sizeof(searchName));
 
@@ -1000,7 +1009,13 @@ int main()
                     pf("Enter ID: ");
                     sf("\n");
                     gets(searchID); // ID is string too... I can send ID . It'll show the same list
+
+                    pf("ON STUDENT\n\n");
                     SearchByStudent(searchID,1);
+
+                    pf("\n\nON EMPLOYEE\n\n");
+                    SearchByEmployee(searchID,1);
+
                     pf("\nWant to make another Operation?\n");
                     memset(searchID,'\0',sizeof(searchID));
                 }
