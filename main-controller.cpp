@@ -512,6 +512,7 @@ si* SearchByStudent(char *name,int ret) // Ret 2 returns prev add,1 ret cur add 
 //        puts(st->ID);
 //        puts(st->grade);
             st = st->next;
+            pf("\n");
             for(int i=0; i<112; i++)
             {
                 pf("-");
@@ -970,7 +971,7 @@ int main()
             /*Search by name*/
             pf("1. Search by name\n");
             pf("2. Search by ID\n");
-            pf("3. Back");
+            pf("3. Back\n");
 
             int src,ff=0;
             while(sf("%d",&src))
@@ -997,7 +998,7 @@ int main()
                     sf("\n");
                     gets(searchID); // ID is string too... I can send ID . It'll show the same list
                     SearchByStudent(searchID,1);
-                    pf("Want to make another Operation?\n");
+                    pf("\nWant to make another Operation?\n");
 
                 }
                 else if(src == 3)
@@ -1009,8 +1010,9 @@ int main()
                 {
                     pf("1. Search by name\n");
                     pf("2. Search by ID\n");
-                    pf("3. Back");
+                    pf("3. Back\n");
                 }
+
             }
 
         }
