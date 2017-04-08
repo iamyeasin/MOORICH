@@ -277,11 +277,12 @@ void printStudentInfo()
 //        puts(st->ID);
 //        puts(st->grade);
         st = st->next;
-        for(int i=0; i<112; i++)
+        pf("\n"); // Will print the line divider
+        for(int i=0; i<111; i++)
         {
             pf("-");
         }
-        pf("\n");
+        pf("\n\n");
     }
 
 
