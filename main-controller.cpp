@@ -18,7 +18,7 @@ struct student
 };
 
 
-struct employee // Could conflict.
+struct employee // Could not conflict.
 {
     char name[5000];
     char ID[5000];
@@ -232,7 +232,7 @@ void printEmployeeInfo()
             pf("%c",st->ID[i]);
         }
 
-        for(int i=0; i<abs(40-sz); i++)
+        for(int i=0; i<abs(40-sz); i++)///INTERMEDIATE SAPCES BETWEEN TWO COLUMN.
         {
             pf(" ");
         }
@@ -253,7 +253,7 @@ void printEmployeeInfo()
         pf("\n");
         for(int i=0; i<112; i++)
         {
-            pf("-");
+            pf("-");///DIVIDER BETWEEN TWO SECTION
         }
         pf("\n\n");
     }
@@ -270,7 +270,7 @@ void printStudentInfo()
 
     printf("Sl.\t\tName\t\t\t\t        ID\t\t        \t\tSection\t\t\n\n");
 
-    while(st->next)
+    while(st->next) ///JUST SIMULATING THE OUTPUT AS THE DATABASE
     {
         pf("%d\t\t",sl++);
 
@@ -302,7 +302,8 @@ void printStudentInfo()
         {
             pf("%c",st->sec[i]);
         }
-        for(int i=0; i<abs(40-sz); i++)
+
+        for(int i=0; i<abs(40-sz); i++) ///INTERMIDIATE SPACES BETWEEN TWO LINE
         {
             pf(" ");
         }
@@ -386,6 +387,7 @@ void updateStudentInfo(si *cur)
         char ID[5000];
         char sec[5000];
         char name[5000];
+
         pf("Enter the student name to update: ");
         sf(" %[^\n]",&name);
         strcpy(cur->name,name);
@@ -410,7 +412,7 @@ void updateStudentInfo(si *cur)
 
 
 /// COVERUP STUDENT INFORMATION UPDATE SECTIION
-void updateEmployeeInfo(ei *cur)
+void updateEmployeeInfo(ei *cur) //RECIVING CURRENT NODE ADDRESS
 {
     //recieve cur node add & scanf the newvalue
     if(cur != NULL)
@@ -418,6 +420,7 @@ void updateEmployeeInfo(ei *cur)
         char ID[5000];
         char salary[5000];
         char name[5000];
+
         pf("Enter the employee name to update: ");
         sf(" %[^\n]",&name);
         strcpy(cur->name,name);
@@ -432,7 +435,7 @@ void updateEmployeeInfo(ei *cur)
 
         pf("Your information is updated successfully.\n");
     }
-    else if(cur == NULL)
+    else if(cur == NULL) ///IF CURRENT NODE IS NOT EXIST
     {
         pf("There is some problem with locating the address. Information Can't be updated.Catch it!"); // IN CASE APC faults
     }
@@ -454,17 +457,17 @@ si* SearchByStudent(char *name,int ret) // Ret 2 returns prev add,1 ret cur add 
     int sl = 1,flag=0;
     si *st = start;
 
-    if(ret == 2)
+    if(ret == 2) // 2 FOR PREV NODE ADD
     {
         while(st->next->next)
         {
-            if((((strcmp(st->next->name,name)) == 0) || ((strcmp(st->next->ID,name)) == 0 )))
+            if((((strcmp(st->next->name,name)) == 0) || ((strcmp(st->next->ID,name)) == 0 ))) ///IF MATCHES ID OR NAME
             {
-                return st;
+                return st; /// RETURN PREV ADDRESS
             }
-            st=st->next;
+            st=st->next; ///JUMPING TO THE NEXT NODE
         }
-        return NULL;
+        return NULL; ///IF THE DESIRED NODE IS NOT FOUND.
     }
 
     if(ret)printf("Sl.\t\tName\t\t\t\t        ID\t\t        \t\tSection\t\t\n\n"); // Printing style is same
@@ -540,9 +543,6 @@ si* SearchByStudent(char *name,int ret) // Ret 2 returns prev add,1 ret cur add 
 
 
 ///Search for EMPLOYEE -> TO AVOID CONFLICT
-
-
-
 
 ei* SearchByEmployee(char *name,int ret) ///Ret 1 for printing the results , 2 for PREV, 0 for current add
 {
@@ -675,7 +675,7 @@ int main()
 
         if(cmd == 1)
         {
-            printf("1. Add new student Information\n");
+            printf("1. Add new student Information\n");// SUBMENU
             pf("2. Delete student information\n");
             pf("3. View all students\n");
             pf("4. Update Student Infomrtion.\n");
@@ -697,9 +697,9 @@ int main()
                     //GLB
                     pf("Want to delete student? let's find out\nEnter the name or ID:  ");
                     char s[5000];
-
                     sf(" %[^\n]",&s);
-                    si *DEL = SearchByStudent(s,0);
+
+                    si *DEL = SearchByStudent(s,0); // 0 RETURNS CURRENT ADDRESS
                     if(DEL == NULL)
                     {
                         pf("Run another Operation\n");
@@ -708,16 +708,16 @@ int main()
 
 
                     pf("\n%s %s %s\n",DEL->name,DEL->ID,DEL->sec);
-
                     pf("\nIs this is the person you want to delete? \n1. Yes\n2. No\n\n");
+
                     int n;
                     sf("%d",&n);
 
 
                     if(n==1)
                     {
-                        si *c = SearchByStudent(s,2); // FIX HERE
-                        deleteStudentInfo(c,DEL);
+                        si *PRE = SearchByStudent(s,2); //2 WILL RETURN  PREVIOUS NODE ADDRESS
+                        deleteStudentInfo(PRE,DEL); // SENDING PREV NODE ADDRESS AND CURRENT ADDRESS. THIS WILL JUMP AND CONNET TO PREV TO NEXT
 
                     }
                     else if(n=2)
@@ -744,7 +744,7 @@ int main()
                     sf(" %[^\n]",&sarc);
 
                     si *cur =  SearchByStudent(sarc,0); // 0 returns the current value
-                    if(cur == NULL)
+                    if(cur == NULL)//ERROR EXCEPTION
                     {
                         pf("No NODE FOUND!");
                         continue;
@@ -763,6 +763,7 @@ int main()
                     }
                     else
                     {
+                        //EROR EXCEPTION
                         pf("Please try another operation.\n\n");
                         continue;
                     }
@@ -770,7 +771,6 @@ int main()
                 else if(cmds == 5)
                 {
                     //Go back to the menu
-                    // goto JUMP;
                     printf("Make another operation: \n");
                     break;
                 }
@@ -779,7 +779,7 @@ int main()
                     printf("Sorry! not recognizable. Try again.\n");
                 }
 
-                if(!x)
+                if(!x)// SUBMENU
                 {
                     pf("\n");
                     printf("1. Add new student Information\n");
@@ -797,7 +797,7 @@ int main()
 
         else if(cmd == 2)
         {
-            printf("1. Add new Employee Information\n");
+            printf("1. Add new Employee Information\n"); // SUBMENU
             pf("2. Delete Employee information\n");
             pf("3. View all Employee\n");
             pf("4. Update Employee Information\n" );
@@ -823,22 +823,22 @@ int main()
 
                     sf(" %[^\n]",&s);
                     ei *DEL = SearchByEmployee(s,0);
-                    if(DEL == NULL)
+
+                    if(DEL == NULL) // IF In case current node is NULL
                     {
                         pf("Run another Operation\n");
                         continue;
                     }
                     pf("\n%s %s %s\n",DEL->name,DEL->ID,DEL->salary);
-
                     pf("\nIs this is the information you want to delete? \n1. Yes\n2. No\n\n");
-                    int n;
-                    sf("%d",&n);
 
+                    int n;
+                    sf("%d",&n); // CMD in submenu
 
                     if(n==1)
                     {
-                        ei *c = SearchByEmployee(s,2);
-                        deleteEmployeeInfo(c,DEL);
+                        ei *pre = SearchByEmployee(s,2);// 2 will return the previous node address
+                        deleteEmployeeInfo(pre,DEL); // sending previous address and current address
                     }
                     else if(n=2)
                     {
@@ -846,7 +846,7 @@ int main()
                         continue;
                     }
 
-                    if(!x)
+                    if(!x)//Will work as submenu
                     {
                         printf("1. Add new Employee Information\n");
                         pf("2. Delete Employee information\n");
@@ -874,7 +874,7 @@ int main()
                     pf("\nEnter Name or ID : ");
                     sf(" %[^\n]",&sarc);
 
-                    ei *cur =  SearchByEmployee(sarc,0); // 0 returns the current value
+                    ei *cur =  SearchByEmployee(sarc,0); // 0 returns the current node address
                     if(cur == NULL)
                     {
                         pf("No NODE FOUND!");
@@ -915,7 +915,7 @@ int main()
                     printf("Sorry! not recognizable. Try again.\n");
                 }
 
-                pf("\n");
+                pf("\n"); // Will work as submenu
                 printf("1. Add new Employee Information\n");
                 pf("2. Delete Employee information\n");
                 pf("3. View all Employee\n");
@@ -951,7 +951,7 @@ int main()
                 {
                     printResultBoard();
                 }
-                else if(x == 3)
+                else if(x == 3) // Will clear a resultboard
                 {
                     start3 = head3;
                     pf("Result Board Cleared Successfully.\n");
@@ -961,7 +961,7 @@ int main()
                     break;
                 }
 
-                if(ff)
+                if(ff) // Will work as submenu
                 {
                     pf("1. Creating A result list\n");
                     pf("2. Printing the recent result list\n");
@@ -991,14 +991,14 @@ int main()
                     scanf("\n"); // Will eat the garbage newline pressed by enter
                     gets(searchName);
 
-                    pf("ON STUDENT\n\n");
-                    SearchByStudent(searchName,1); // Will show the matching list
+                    pf("\n\nON STUDENT\n\n");
+                    SearchByStudent(searchName,1); // Will show the matching list on student. 1 represent printing the list
 
                     pf("\n\nON EMPLOYEE\n\n");
-                    SearchByEmployee(searchName,1);
+                    SearchByEmployee(searchName,1); //Same as line 995
 
                     pf("Want to make another Operation?\n");
-                    memset(searchName,'\0',sizeof(searchName));
+                    memset(searchName,'\0',sizeof(searchName)); // Clearing the array from junk
 
                 }
                 else if(src == 2)
@@ -1045,7 +1045,7 @@ int main()
             pf("All available Employee DATABASES: \n");
             printEmployeeInfo();
         }
-        else if(cmd == 6)
+        else if(cmd == 6) // JUST PRINTING THE USER MANUAL
         {
             pf("Welcome to the user manual. Every time the menu appears to the Screen just put the serial number\n");
             pf("to execute the operation.Simply Do as the command line tells you to do, based on your operation it will\n");
@@ -1058,7 +1058,7 @@ int main()
             pf("Sorry! Not recognizable.Try again");
         }
 
-        puts("");
+        puts(""); // When the loop breaks this will work again as returning to the menu
         pf("1.  Students\n");
         pf("2.  Employees\n");
         pf("3.  Result Board\n");
