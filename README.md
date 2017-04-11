@@ -3,4 +3,4 @@ Moorich - is our team Name. Our project is very simple. It controls the students
 
 
 
-##################### TO TEST THIS JUST DOWNLOAD THE MOORICH.EXE AND RUN.WINDOWS MIGHT GIVE YOU AN WARNING. ###################################
+##################### TO TEST THIS JUST DOWNLOAD THE MOORICH.EXE AND RUN.###################################
