@@ -564,7 +564,7 @@ ei* SearchByEmployee(char *name,int ret) ///Ret 1 for printing the results , 2 f
         return NULL;
     }
 
-    if(ret)printf("Sl.\t\tName\t\t\t\t        ID\t\t        \t\Salary\t\t\n\n"); // Printing style is same
+    if(ret)printf("Sl.\t\tName\t\t\t\t        ID\t\t        \t\tSalary\t\t\n\n"); // Printing style is same
 
     while(st->next)
     {
